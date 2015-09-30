@@ -6,7 +6,9 @@ RUN fsudo yum install -y jre
 RUN OPENREFINE_VERSION=2.6-rc1 && \
   curl -s -L "https://github.com/OpenRefine/OpenRefine/releases/download/v${OPENREFINE_VERSION}/openrefine-linux-${OPENREFINE_VERSION}.tar.gz" | \
     tar xzv -C /opt && \
-  ln -s /opt/openrefine-${OPENREFINE_VERSION} /opt/openrefine
+  ln -s /opt/openrefine-${OPENREFINE_VERSION} /opt/openrefine && \
+  mkdir -p /home/researcher/.local/share/openrefine && \
+  echo '{"projectIDs":[],"preferences":{"entries":{"scripting.starred-expressions":{"class":"com.google.refine.preference.TopList","top":2147483647,"list":[]},"scripting.expressions":{"class":"com.google.refine.preference.TopList","top":100,"list":[]}}}}' > /home/researcher/.local/share/openrefine/workspace.json
 
 # Add supporting files (directory at a time to improve build speed)
 COPY etc /etc

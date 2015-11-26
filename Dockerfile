@@ -1,7 +1,7 @@
-FROM dit4c/dit4c-container-base:latest
+FROM dit4c/dit4c-container-base:withroot
 MAINTAINER Tim Dettrick <t.dettrick@uq.edu.au>
 
-RUN fsudo yum install -y jre
+RUN yum install -y jre
 
 RUN OPENREFINE_VERSION=2.6-rc.2 && \
   curl -s -L "https://github.com/OpenRefine/OpenRefine/releases/download/${OPENREFINE_VERSION}/openrefine-linux-${OPENREFINE_VERSION}.tar.gz" | \
@@ -14,7 +14,4 @@ RUN OPENREFINE_VERSION=2.6-rc.2 && \
 COPY etc /etc
 COPY var /var
 
-# Because COPY doesn't respect USER...
-USER root
-RUN chown -R researcher:researcher /etc /opt /var
-USER researcher
+RUN chown -R researcher:researcher /home/researcher

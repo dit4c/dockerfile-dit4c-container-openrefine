@@ -1,4 +1,4 @@
-FROM dit4c/dit4c-container-base:withroot
+FROM dit4c/dit4c-container-base
 MAINTAINER Tim Dettrick <t.dettrick@uq.edu.au>
 
 RUN yum install -y jre
